@@ -1,5 +1,6 @@
 package br.com.alura.screammatch;
 
+import br.com.alura.screammatch.model.DadosEpisodio;
 import br.com.alura.screammatch.model.DadosSerie;
 import br.com.alura.screammatch.service.ConsumoApi;
 import br.com.alura.screammatch.service.ConverteDados;
@@ -25,6 +26,9 @@ public class ScreammatchApplication implements CommandLineRunner {
 		ConverteDados conversor = new ConverteDados();
 		DadosSerie dados = conversor.obterDados(json, DadosSerie.class);
 		System.out.println(dados);
+		json = consumoApi.obterDados("https://www.omdbapi.com/?t=gilmore+girls&season=1&episode=2&apikey=4f942238");
+		DadosEpisodio dadosEpisodio = conversor.obterDados(json, DadosEpisodio.class);
+		System.out.println(dadosEpisodio);
 	}
 
 }
