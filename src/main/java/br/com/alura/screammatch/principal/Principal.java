@@ -3,6 +3,7 @@ package br.com.alura.screammatch.principal;
 import br.com.alura.screammatch.model.DadosEpisodio;
 import br.com.alura.screammatch.model.DadosSerie;
 import br.com.alura.screammatch.model.DadosTemporada;
+import br.com.alura.screammatch.model.Episodio;
 import br.com.alura.screammatch.service.ConsumoApi;
 import br.com.alura.screammatch.service.ConverteDados;
 
@@ -56,5 +57,12 @@ public class Principal {
                 .sorted(Comparator.comparing(DadosEpisodio::avalicao).reversed())
                 .limit(5)
                 .forEach(System.out::println);
+
+        List<Episodio> episodios = temporadas.stream()
+                .flatMap(t -> t.episodios().stream()
+                        .map(d -> new Episodio(t.numero(),d))
+                ).collect(Collectors.toList());
+
+        episodios.forEach(System.out::println);
     }
 }
